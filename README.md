@@ -1,18 +1,4 @@
 # Multimodal Constraint-Aware Search & Learned Reranking
-
-[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com)
-[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C.svg)](https://pytorch.org)
-[![OpenCLIP](https://img.shields.io/badge/CLIP-ViT--B%2F32-purple.svg)](https://github.com/mlfoundations/open_clip)
-[![LightGBM](https://img.shields.io/badge/LightGBM-LambdaMART-brightgreen.svg)](https://lightgbm.readthedocs.io)
-[![Pinecone](https://img.shields.io/badge/VectorDB-Pinecone-040404.svg)](https://www.pinecone.io)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-> **Resume Statement:**
-> **"Built a production-grade multimodal search and learning-to-rank system using CLIP, Pinecone and LambdaMART, incorporating constraint-aware retrieval and hard-negative learning; improved NDCG@10 by 28.6% and constraint satisfaction by 32.4% over CLIP semantic retrieval while maintaining 48.6 ms p95 latency."**
-
----
-
 ## 📌 Problem Overview & Motivation
 
 Standard multimodal search systems typically rely on continuous embedding representations (such as CLIP or SigLIP) to perform vector nearest-neighbor search. While effective for fuzzy aesthetic similarity, this approach exhibits serious failure modes in commercial retail retrieval:
@@ -58,7 +44,7 @@ flowchart TD
 
     subgraph Presentation_Layer ["5. Serving & Interactive UI"]
         Ranked --> API["FastAPI REST API"]
-        API --> UI["Portfolio Web Application<br/>(Vanilla HTML / CSS / JS)"]
+        API --> UI["Web Application<br/>(Vanilla HTML / CSS / JS)"]
     end
 ```
 
@@ -163,7 +149,7 @@ python scripts/05_evaluate.py
 ```bash
 uvicorn src.api.main:app --host 0.0.0.0 --port 8000 --reload
 ```
-Open **[http://localhost:8000](http://localhost:8000)** in your browser to access the portfolio-ready web UI.
+Open **[http://localhost:8000](http://localhost:8000)** in your browser to access the web UI.
 
 ---
 
@@ -226,3 +212,12 @@ pytest -v tests/
 
 ## 📄 License
 This project is licensed under the MIT License.
+
+---
+
+## 👤 Author
+
+**Sujato Dutta**  
+AI Engineer | Researcher  
+[LinkedIn](https://www.linkedin.com/in/sujato-dutta/)
+
