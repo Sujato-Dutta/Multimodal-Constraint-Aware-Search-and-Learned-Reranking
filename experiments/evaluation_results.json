@@ -1,0 +1,739 @@
+{
+  "num_test_queries": 60,
+  "baseline": {
+    "ndcg@5": 0.2048,
+    "ndcg@10": 0.1778,
+    "recall@5": 0.2933,
+    "recall@10": 0.2504,
+    "mrr": 0.3851,
+    "constraint_satisfaction_rate": 0.1483,
+    "constraint_violation_rate": 0.8517,
+    "multi_constraint_success_rate": 0.05,
+    "latency_ms": {
+      "p50": 1.46,
+      "p90": 2.45,
+      "p95": 2.92,
+      "mean": 1.56
+    }
+  },
+  "proposed_system": {
+    "ndcg@5": 0.488,
+    "ndcg@10": 0.4239,
+    "recall@5": 0.5267,
+    "recall@10": 0.4246,
+    "mrr": 0.7083,
+    "constraint_satisfaction_rate": 0.32,
+    "constraint_violation_rate": 0.68,
+    "multi_constraint_success_rate": 0.1833,
+    "latency_ms": {
+      "p50": 8.61,
+      "p90": 14.48,
+      "p95": 18.6,
+      "mean": 9.85,
+      "retrieval_p95": 1.33,
+      "reranking_p95": 16.2,
+      "throughput_qps": 101.57
+    }
+  },
+  "percentage_improvements": {
+    "ndcg@10": 138.43,
+    "recall@10": 69.55,
+    "mrr": 83.92,
+    "constraint_satisfaction": 115.73,
+    "multi_constraint_success": 266.67
+  },
+  "statistical_significance": {
+    "ndcg@10": {
+      "n_samples": 60,
+      "mean_baseline": 0.1778,
+      "mean_proposed": 0.4239,
+      "absolute_gain": 0.2461,
+      "relative_gain_percent": 138.43,
+      "paired_ttest": {
+        "t_statistic": 7.1715,
+        "p_value": 1.3858792823116047e-09,
+        "is_significant_p05": true,
+        "is_significant_p01": true
+      },
+      "wilcoxon_test": {
+        "w_statistic": 8.0,
+        "p_value": 4.370327682297887e-08,
+        "is_significant": true
+      },
+      "bootstrap_95_ci": {
+        "mean_diff": 0.2461,
+        "ci_lower": 0.1856,
+        "ci_upper": 0.3121,
+        "significant": true
+      }
+    },
+    "constraint_satisfaction": {
+      "n_samples": 60,
+      "mean_baseline": 0.1483,
+      "mean_proposed": 0.32,
+      "absolute_gain": 0.1717,
+      "relative_gain_percent": 115.73,
+      "paired_ttest": {
+        "t_statistic": 5.1975,
+        "p_value": 2.643543658252485e-06,
+        "is_significant_p05": true,
+        "is_significant_p01": true
+      },
+      "wilcoxon_test": {
+        "w_statistic": 9.0,
+        "p_value": 6.29894197606257e-06,
+        "is_significant": true
+      },
+      "bootstrap_95_ci": {
+        "mean_diff": 0.1717,
+        "ci_lower": 0.1117,
+        "ci_upper": 0.2333,
+        "significant": true
+      }
+    }
+  },
+  "error_analysis_samples": [
+    {
+      "query": "men red athletic workout shorts under $100",
+      "baseline_rank": 3,
+      "product_name": "Saturday Shorts",
+      "color": "Grey",
+      "price": 45.0,
+      "violated_constraint": "Expected: {'category': 'Apparel', 'subcategory': 'Shorts', 'color': 'Red', 'max_price': 100.0, 'min_price': None, 'gender': 'Men', 'brand': 'Adidas', 'is_waterproof': False}, Found: Grey, $45.0"
+    },
+    {
+      "query": "blue running shorts under $140",
+      "baseline_rank": 1,
+      "product_name": "Marathon 20 Shorts",
+      "color": "Black",
+      "price": 21.0,
+      "violated_constraint": "Expected: {'category': 'Apparel', 'subcategory': 'Shorts', 'color': 'Blue', 'max_price': 140.0, 'min_price': None, 'gender': None, 'brand': 'Adidas', 'is_waterproof': False}, Found: Black, $21.0"
+    },
+    {
+      "query": "similar track pants under $70",
+      "baseline_rank": 1,
+      "product_name": "Runfalcon 2.0 Shoes",
+      "color": "Grey",
+      "price": 36.0,
+      "violated_constraint": "Expected: {'category': 'Apparel', 'subcategory': 'Pants', 'color': None, 'max_price': 70.0, 'min_price': None, 'gender': None, 'brand': 'Adidas', 'is_waterproof': False}, Found: Grey, $36.0"
+    },
+    {
+      "query": "similar women white running cap under $70",
+      "baseline_rank": 2,
+      "product_name": "Runfalcon 2.0 Shoes",
+      "color": "Grey",
+      "price": 36.0,
+      "violated_constraint": "Expected: {'category': 'Accessories', 'subcategory': 'Accessories', 'color': 'White', 'max_price': 70.0, 'min_price': None, 'gender': 'Women', 'brand': 'Adidas', 'is_waterproof': False}, Found: Grey, $36.0"
+    },
+    {
+      "query": "women pink court shoes under $100",
+      "baseline_rank": 1,
+      "product_name": "Runfalcon 2.0 Shoes",
+      "color": "Grey",
+      "price": 36.0,
+      "violated_constraint": "Expected: {'category': 'Footwear', 'subcategory': 'General Footwear', 'color': 'Pink', 'max_price': 100.0, 'min_price': None, 'gender': 'Women', 'brand': 'Adidas', 'is_waterproof': False}, Found: Grey, $36.0"
+    }
+  ],
+  "query_level_records": [
+    {
+      "query_id": "Q-0354",
+      "text": "men red athletic workout shorts under $100",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.6593863383933839,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 0.4,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.3406136616066161
+    },
+    {
+      "query_id": "Q-0146",
+      "text": "blue running shorts under $140",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.12418976569221404,
+      "proposed_ndcg10": 0.8106919125176929,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.6,
+      "gain_ndcg10": 0.6865021468254788
+    },
+    {
+      "query_id": "Q-0312",
+      "text": "black athletic workout shorts under $100",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.8701249883466593,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 0.8,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.1298750116533407
+    },
+    {
+      "query_id": "Q-0365",
+      "text": "similar track pants under $70",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.09432504269917721,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.1,
+      "gain_ndcg10": 0.09432504269917721
+    },
+    {
+      "query_id": "Q-0308",
+      "text": "men blue training tee under $180",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.830518058996557,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 1.0,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.16948194100344305
+    },
+    {
+      "query_id": "Q-0284",
+      "text": "similar women white running cap under $70",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.09432504269917721,
+      "proposed_ndcg10": 0.09432504269917721,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.1,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0128",
+      "text": "women pink court shoes under $100",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0044",
+      "text": "similar blue compression leggings under $180",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.09432504269917721,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.1,
+      "gain_ndcg10": 0.09432504269917721
+    },
+    {
+      "query_id": "Q-0331",
+      "text": "women black workout t-shirt under $85",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.04062358472980748,
+      "proposed_ndcg10": 0.5482711628451692,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.7,
+      "gain_ndcg10": 0.5076475781153618
+    },
+    {
+      "query_id": "Q-0142",
+      "text": "women red training pants under $100",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.20766352943278257,
+      "proposed_ndcg10": 0.7316172012414546,
+      "baseline_cs": 0.2,
+      "proposed_cs": 0.4,
+      "gain_ndcg10": 0.523953671808672
+    },
+    {
+      "query_id": "Q-0127",
+      "text": "white windbreaker jacket under $180",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.3927931093044172,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 0.2,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.6072068906955828
+    },
+    {
+      "query_id": "Q-0380",
+      "text": "women white training pants under $160",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.5664524847271537,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.2,
+      "gain_ndcg10": 0.5664524847271537
+    },
+    {
+      "query_id": "Q-0162",
+      "text": "women pink compression leggings under $120",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0220",
+      "text": "men green training shorts under $200",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.727329844310522,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.6,
+      "gain_ndcg10": 0.727329844310522
+    },
+    {
+      "query_id": "Q-0393",
+      "text": "pink lifestyle sneakers under $55",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.085143117641621,
+      "proposed_ndcg10": 0.22009176629808017,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.1,
+      "gain_ndcg10": 0.13494864865645917
+    },
+    {
+      "query_id": "Q-0418",
+      "text": "men running jacket under $100",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.4459775007368556,
+      "proposed_ndcg10": 0.3349799428374502,
+      "baseline_cs": 0.5,
+      "proposed_cs": 0.3,
+      "gain_ndcg10": -0.11099755789940541
+    },
+    {
+      "query_id": "Q-0374",
+      "text": "women yellow jogging sneakers under $120",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0302",
+      "text": "black athletic trainers under $55",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.07328303955042421,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 0.1,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.9267169604495757
+    },
+    {
+      "query_id": "Q-0064",
+      "text": "grey lifestyle sneakers under $160",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.11004588314904008,
+      "proposed_ndcg10": 0.5096236780504823,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.4,
+      "gain_ndcg10": 0.3995777949014422
+    },
+    {
+      "query_id": "Q-0072",
+      "text": "blue running shoes under $180",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.29538747463168863,
+      "proposed_ndcg10": 0.8085052658786465,
+      "baseline_cs": 0.3,
+      "proposed_cs": 0.6,
+      "gain_ndcg10": 0.5131177912469578
+    },
+    {
+      "query_id": "Q-0052",
+      "text": "women green casual sneakers under $55",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0045",
+      "text": "similar red running cap under $70",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0112",
+      "text": "similar yellow training pants under $70",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0227",
+      "text": "similar black jogging sneakers under $120",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.41877936461947846,
+      "proposed_ndcg10": 0.5547497336966348,
+      "baseline_cs": 0.7,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.13597036907715637
+    },
+    {
+      "query_id": "Q-0352",
+      "text": "similar blue jogging sneakers under $55",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0316",
+      "text": "blue workout t-shirt under $160",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.22009176629808017,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.1,
+      "gain_ndcg10": 0.22009176629808017
+    },
+    {
+      "query_id": "Q-0211",
+      "text": "red jogging sneakers under $140",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.14729944898999456,
+      "proposed_ndcg10": 0.6661911043891029,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.7,
+      "gain_ndcg10": 0.5188916553991083
+    },
+    {
+      "query_id": "Q-0078",
+      "text": "similar red waterproof running jacket under $140",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.28371255449703187,
+      "proposed_ndcg10": 0.3436966913921454,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.05998413689511356
+    },
+    {
+      "query_id": "Q-0384",
+      "text": "red running shoes under $160",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.3758657678593505,
+      "proposed_ndcg10": 0.6209986060584879,
+      "baseline_cs": 0.2,
+      "proposed_cs": 0.2,
+      "gain_ndcg10": 0.2451328381991374
+    },
+    {
+      "query_id": "Q-0322",
+      "text": "similar yellow training pants under $100",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0110",
+      "text": "similar black sports backpack under $120",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.09432504269917721,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.1,
+      "gain_ndcg10": 0.09432504269917721
+    },
+    {
+      "query_id": "Q-0370",
+      "text": "red running shorts under $200",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.3125485300240686,
+      "proposed_ndcg10": 0.711087670112031,
+      "baseline_cs": 0.2,
+      "proposed_cs": 0.7,
+      "gain_ndcg10": 0.3985391400879624
+    },
+    {
+      "query_id": "Q-0180",
+      "text": "cushioned running socks under $85",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.190327426205681,
+      "proposed_ndcg10": 0.19446110337479378,
+      "baseline_cs": 0.3,
+      "proposed_cs": 0.3,
+      "gain_ndcg10": 0.004133677169112782
+    },
+    {
+      "query_id": "Q-0226",
+      "text": "yellow casual sneakers under $120",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0085",
+      "text": "women yellow court shoes under $70",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0333",
+      "text": "blue track jacket under $180",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.5664524847271537,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 0.2,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.4335475152728463
+    },
+    {
+      "query_id": "Q-0313",
+      "text": "similar men grey cushioned running socks under $200",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0005",
+      "text": "men black cushioned marathon running shoes under $130",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.4875021988128933,
+      "proposed_ndcg10": 0.8558987948391588,
+      "baseline_cs": 0.7,
+      "proposed_cs": 0.9,
+      "gain_ndcg10": 0.36839659602626545
+    },
+    {
+      "query_id": "Q-0289",
+      "text": "similar women grey training tee under $160",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0272",
+      "text": "green waterproof retro street shoes under $200",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.041158854421792866,
+      "proposed_ndcg10": 0.1671070046548298,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.12594815023303693
+    },
+    {
+      "query_id": "Q-0036",
+      "text": "women red breathable athletic top under $70",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.10644837059332632,
+      "proposed_ndcg10": 0.4146099787672766,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.4,
+      "gain_ndcg10": 0.30816160817395033
+    },
+    {
+      "query_id": "Q-0074",
+      "text": "similar women white waterproof running jacket under $120",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.3589542101716347,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.3589542101716347
+    },
+    {
+      "query_id": "Q-0347",
+      "text": "similar pink waterproof weather-resistant jacket under $160",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0329",
+      "text": "grey waterproof court shoes under $85",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.3963918729015093,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.6036081270984908
+    },
+    {
+      "query_id": "Q-0069",
+      "text": "women red waterproof running jacket under $100",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.33013764944712026,
+      "proposed_ndcg10": 0.6929852696575347,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.36284762021041445
+    },
+    {
+      "query_id": "Q-0386",
+      "text": "similar blue running shoes under $120",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.4252062396353545,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.2,
+      "gain_ndcg10": 0.4252062396353545
+    },
+    {
+      "query_id": "Q-0397",
+      "text": "women training shorts under $140",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 1.0,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 1.0,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0196",
+      "text": "similar men red waterproof windbreaker jacket under $70",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.22009176629808017,
+      "proposed_ndcg10": 0.8701249883466593,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.6500332220485792
+    },
+    {
+      "query_id": "Q-0071",
+      "text": "pink training pants under $180",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.5080336255856914,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.3,
+      "gain_ndcg10": 0.5080336255856914
+    },
+    {
+      "query_id": "Q-0154",
+      "text": "similar women blue track pants under $55",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.5637884576902256,
+      "proposed_ndcg10": 0.6489315753318466,
+      "baseline_cs": 0.4,
+      "proposed_cs": 0.5,
+      "gain_ndcg10": 0.08514311764162108
+    },
+    {
+      "query_id": "Q-0189",
+      "text": "similar green athletic trainers under $140",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.12525066453561207,
+      "proposed_ndcg10": 0.39703521295870065,
+      "baseline_cs": 0.1,
+      "proposed_cs": 0.1,
+      "gain_ndcg10": 0.2717845484230886
+    },
+    {
+      "query_id": "Q-0161",
+      "text": "similar women grey training shorts under $40",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.6732978674967758,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.3,
+      "gain_ndcg10": 0.6732978674967758
+    },
+    {
+      "query_id": "Q-0414",
+      "text": "green running shorts under $100",
+      "modality": "hard_negative_adversarial",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0053",
+      "text": "women pink retro street shoes under $85",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.3589542101716347,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.2,
+      "gain_ndcg10": 0.3589542101716347
+    },
+    {
+      "query_id": "Q-0413",
+      "text": "similar women green training pants under $55",
+      "modality": "image_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0375",
+      "text": "red lifestyle sneakers under $160",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.17113998229335653,
+      "proposed_ndcg10": 0.19509461280598472,
+      "baseline_cs": 0.2,
+      "proposed_cs": 0.2,
+      "gain_ndcg10": 0.023954630512628194
+    },
+    {
+      "query_id": "Q-0046",
+      "text": "similar green breathable athletic top under $160",
+      "modality": "multimodal",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0197",
+      "text": "grey running cap under $200",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.0,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.0,
+      "gain_ndcg10": 0.0
+    },
+    {
+      "query_id": "Q-0118",
+      "text": "men pink training shorts under $160",
+      "modality": "text_only",
+      "baseline_ndcg10": 0.0,
+      "proposed_ndcg10": 0.9200933131394097,
+      "baseline_cs": 0.0,
+      "proposed_cs": 0.8,
+      "gain_ndcg10": 0.9200933131394097
+    },
+    {
+      "query_id": "Q-0037",
+      "text": "women black lifestyle sneakers under $85",
+      "modality": "multi_constraint",
+      "baseline_ndcg10": 0.7002113294808922,
+      "proposed_ndcg10": 1.0,
+      "baseline_cs": 0.7,
+      "proposed_cs": 1.0,
+      "gain_ndcg10": 0.29978867051910785
+    }
+  ]
+}

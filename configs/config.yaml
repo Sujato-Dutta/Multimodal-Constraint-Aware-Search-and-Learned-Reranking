@@ -1,0 +1,49 @@
+dataset:
+  kaggle_dataset_id: "thedevastator/adidas-fashion-retail-products-dataset-9300-prod"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  queries_dir: "data/queries"
+  embeddings_dir: "data/embeddings"
+  max_items: 9300
+  train_split: 0.70
+  val_split: 0.15
+  test_split: 0.15
+  random_seed: 42
+
+embeddings:
+  model_name: "openai/clip-vit-base-patch32"
+  device: "auto"
+  batch_size: 64
+  embedding_dim: 512
+  normalize: true
+
+retrieval:
+  top_k_candidates: 50
+  pinecone_index_name: "multimodal-constraint-search"
+  metric: "cosine"
+  dimension: 512
+  use_local_fallback: true
+
+ranking:
+  model_type: "lightgbm"
+  objective: "lambdarank"
+  metric: "ndcg"
+  ndcg_eval_at: [5, 10]
+  learning_rate: 0.05
+  num_leaves: 31
+  n_estimators: 150
+  min_data_in_leaf: 10
+  hard_negatives_per_query: 5
+  model_output_path: "models/lambdamart_reranker.joblib"
+
+evaluation:
+  k_values: [5, 10]
+  bootstrap_iterations: 1000
+  confidence_level: 0.95
+  results_output_dir: "experiments"
+  plots_output_dir: "experiments/plots"
+
+server:
+  host: "0.0.0.0"
+  port: 8000
+  reload: false

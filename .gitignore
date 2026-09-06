@@ -1,0 +1,73 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Environment Variables & Secrets
+.env
+.env.*
+!.env.example
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Antigravity & Agent artifacts
+.agent/
+.agents/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Datasets, Embeddings & Data Dumps
+data/
+*.npy
+*.npz
+*.parquet
+*.h5
+*.hdf5
+*.feather
+*.arrow
+
+# Trained Models, Checkpoints & Weights
+models/
+checkpoints/
+*.joblib
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+*.ckpt
+*.weights
+
+# ML Experiment Tracking & Caches
+wandb/
+mlruns/
+runs/
+.cache/
+lightning_logs/
