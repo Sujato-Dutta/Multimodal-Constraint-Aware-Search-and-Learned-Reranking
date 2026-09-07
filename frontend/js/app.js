@@ -4,8 +4,8 @@
  * pipeline animations, and benchmark metrics rendering.
  */
 
-// Sample fallback mock results matching assets/mock_image.png exactly
-const INITIAL_DEMO_RESULTS = [
+// Full catalog pool for client fallback and demo interactions
+const DEMO_CATALOG = [
   {
     product_id: "ADI-00001",
     name: "Ultraboost Light Running Shoes",
@@ -20,7 +20,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.962,
     rerank_score: 0.96,
-    initial_rank: 2,
+    initial_rank: 1,
     final_rank: 1,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -38,7 +38,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.915,
     rerank_score: 0.93,
-    initial_rank: 4,
+    initial_rank: 2,
     final_rank: 2,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -56,7 +56,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.895,
     rerank_score: 0.91,
-    initial_rank: 5,
+    initial_rank: 3,
     final_rank: 3,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -74,7 +74,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.880,
     rerank_score: 0.91,
-    initial_rank: 6,
+    initial_rank: 4,
     final_rank: 4,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -92,7 +92,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.872,
     rerank_score: 0.87,
-    initial_rank: 7,
+    initial_rank: 5,
     final_rank: 5,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -110,7 +110,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1582588678413-dbf45f4823e9?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.841,
     rerank_score: 0.84,
-    initial_rank: 8,
+    initial_rank: 6,
     final_rank: 6,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -128,7 +128,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.835,
     rerank_score: 0.83,
-    initial_rank: 9,
+    initial_rank: 7,
     final_rank: 7,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -146,7 +146,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.820,
     rerank_score: 0.82,
-    initial_rank: 10,
+    initial_rank: 8,
     final_rank: 8,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
@@ -164,7 +164,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.785,
     rerank_score: 0.78,
-    initial_rank: 1,
+    initial_rank: 9,
     final_rank: 9,
     constraint_status: { all_satisfied: false, category_ok: false, color_ok: true, price_ok: true, status_text: "Price marginal" }
   },
@@ -182,7 +182,7 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.772,
     rerank_score: 0.78,
-    initial_rank: 3,
+    initial_rank: 10,
     final_rank: 10,
     constraint_status: { all_satisfied: true, category_ok: false, color_ok: true, price_ok: true }
   },
@@ -200,8 +200,8 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.94,
     rerank_score: 0.96,
-    initial_rank: 2,
-    final_rank: 1,
+    initial_rank: 11,
+    final_rank: 11,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
   {
@@ -218,8 +218,8 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.89,
     rerank_score: 0.91,
-    initial_rank: 3,
-    final_rank: 2,
+    initial_rank: 12,
+    final_rank: 12,
     constraint_status: { all_satisfied: true, category_ok: true, color_ok: true, price_ok: true }
   },
   {
@@ -236,8 +236,8 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.82,
     rerank_score: 0.52,
-    initial_rank: 1,
-    final_rank: 8,
+    initial_rank: 13,
+    final_rank: 13,
     constraint_status: { all_satisfied: false, category_ok: true, color_ok: false, price_ok: true, hard_violated: true }
   },
   {
@@ -254,11 +254,14 @@ const INITIAL_DEMO_RESULTS = [
     image_url: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=600&q=80",
     similarity_score: 0.80,
     rerank_score: 0.48,
-    initial_rank: 5,
-    final_rank: 9,
+    initial_rank: 14,
+    final_rank: 14,
     constraint_status: { all_satisfied: false, category_ok: true, color_ok: false, price_ok: false, hard_violated: true }
   }
 ];
+
+// Initial top-10 default results rendered on page load
+const INITIAL_DEMO_RESULTS = DEMO_CATALOG.slice(0, 10);
 
 let currentUploadedImageBase64 = null;
 let currentResults = [...INITIAL_DEMO_RESULTS];
@@ -507,7 +510,7 @@ function renderClientFallback(query) {
   });
 
   // Filter and rank demo catalog
-  let candidates = INITIAL_DEMO_RESULTS.map(item => ({ ...item }));
+  let candidates = DEMO_CATALOG.map(item => ({ ...item }));
   candidates.forEach(item => {
     const colMatch = !matchedColor || item.color.toLowerCase() === matchedColor.toLowerCase();
     const catMatch = item.category.toLowerCase() === cat.toLowerCase();
@@ -583,7 +586,8 @@ function renderProductCards(results) {
   }
 
   results.forEach((prod, idx) => {
-    const rank = prod.final_rank || (idx + 1);
+    const rank = idx + 1;
+    prod.final_rank = rank;
     const status = prod.constraint_status || { all_satisfied: true };
 
     let displayScore = 0.95;
