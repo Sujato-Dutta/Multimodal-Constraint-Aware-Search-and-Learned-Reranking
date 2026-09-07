@@ -41,14 +41,6 @@
           <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           Metrics
         </button>
-        <button class="nav-tab" data-tab="api-tab" id="tab-api">
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          API
-        </button>
-        <button class="nav-tab" data-tab="docs-tab" id="tab-docs">
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Docs
-        </button>
       </nav>
     </div>
 
@@ -58,10 +50,10 @@
         <svg class="sun-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
       <div class="user-profile">
-        <div class="user-avatar">AS</div>
+        <div class="user-avatar">SD</div>
         <div class="user-meta">
-          <span class="user-name">Aman S.</span>
-          <span class="user-role">Applied Scientist</span>
+          <span class="user-name">Sujato Dutta</span>
+          <span class="user-role">AI Engineer | Researcher</span>
         </div>
       </div>
     </div>
@@ -72,9 +64,6 @@
     <!-- Big Search Bar Section -->
     <section class="search-header-section">
       <div class="search-bar-wrapper">
-        <div class="search-icon-prefix">
-          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
         <input type="text" id="query-input" class="search-input" placeholder="e.g. similar black running shoes under $120" value="similar black running shoes under $120">
         <button class="clear-input-btn" id="btn-clear-query" title="Clear query">×</button>
         <button class="btn-primary-search" id="btn-search">
@@ -92,10 +81,6 @@
           <button class="preset-chip" data-query="white classic tennis sneakers under $100">White Sneakers &lt;$100</button>
           <button class="preset-chip" data-query="men blue sports track top jacket under $70">Blue Track Jacket &lt;$70</button>
         </div>
-        <button class="btn-outline-action" id="btn-save-experiment">
-          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-          Save Experiment
-        </button>
       </div>
     </section>
 
@@ -197,7 +182,6 @@
         <div class="results-header-bar">
           <div class="results-title-group">
             <h2>Top Results (Reranked)</h2>
-            <span class="results-count-pill" id="results-count">10 results</span>
           </div>
           <div class="results-controls">
             <div class="sort-wrapper">
@@ -223,13 +207,6 @@
         <!-- Product Cards Grid -->
         <div class="product-cards-grid" id="product-grid">
           <!-- Populated dynamically by app.js -->
-        </div>
-
-        <div class="load-more-wrapper">
-          <button class="btn-load-more" id="btn-load-more">
-            Show more results 
-            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
         </div>
       </section>
 
@@ -277,7 +254,6 @@
               <div class="comp-stat"><span class="lbl">Recall@10</span> <strong id="comp-b-rec">0.627</strong></div>
               <div class="comp-stat"><span class="lbl">Latency (p95)</span> <strong id="comp-b-lat">2.02 s</strong></div>
             </div>
-            <div class="comp-arrow">→</div>
             <div class="comp-col final-col">
               <span class="comp-system-name">Final</span>
               <span class="comp-system-sub">Constraint-Aware Reranking</span>
@@ -309,7 +285,6 @@
           <h2>Evaluation Benchmarks & Experiments</h2>
           <p class="subtitle">Complete comparative results across test queries comparing Baseline CLIP with LightGBM LambdaMART Reranker.</p>
         </div>
-        <button class="btn-primary-action" id="btn-re-evaluate">Re-run Benchmark Suite</button>
       </div>
 
       <div class="benchmark-summary-cards">
@@ -458,79 +433,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 4: API Explorer -->
-  <div class="tab-pane" id="api-pane">
-    <div class="experiments-container">
-      <h2>REST API Explorer</h2>
-      <p class="subtitle">Test endpoints live or integrate via standard HTTP curl commands.</p>
-
-      <div class="glass-card">
-        <h3>Available Endpoints</h3>
-        <div class="api-endpoint-list">
-          <div class="endpoint-row">
-            <span class="method post">POST</span>
-            <code>/api/search/multimodal</code>
-            <span class="ep-desc">Combined text and image query search with constraint parsing & LambdaMART reranking.</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method post">POST</span>
-            <code>/api/search/text</code>
-            <span class="ep-desc">Text-only search with automatic entity and constraint extraction.</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method post">POST</span>
-            <code>/api/search/baseline</code>
-            <span class="ep-desc">Pure CLIP semantic retrieval baseline without constraint reasoning.</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method get">GET</span>
-            <code>/api/health</code>
-            <span class="ep-desc">System health check, memory and vector index status.</span>
-          </div>
-          <div class="endpoint-row">
-            <span class="method get">GET</span>
-            <code>/api/experiments</code>
-            <span class="ep-desc">Retrieves benchmark metrics and statistical test outputs.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass-card mt-4">
-        <h3>Sample Curl Command</h3>
-        <pre class="code-block"><code>curl -X POST "http://localhost:8000/api/search/text" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "similar black running shoes under $120",
-    "top_k": 10
-  }'</code></pre>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB 5: Documentation & Resume Statement -->
-  <div class="tab-pane" id="docs-pane">
-    <div class="experiments-container">
-      <h2>Architecture & Portfolio Summary</h2>
-      
-      <div class="glass-card">
-        <h3>Executive Resume Statement</h3>
-        <blockquote class="resume-quote">
-          "Built a production-grade multimodal search and learning-to-rank system using CLIP, Pinecone and LambdaMART, incorporating constraint-aware retrieval and hard-negative learning; improved NDCG@10 by <strong>28.6%</strong> and constraint satisfaction by <strong>32.4%</strong> over CLIP semantic retrieval while maintaining <strong>48.6 ms</strong> p95 latency."
-        </blockquote>
-      </div>
-
-      <div class="glass-card mt-4">
-        <h3>System Design Highlights</h3>
-        <ul class="highlights-list">
-          <li><strong>Disentangled Representation:</strong> Separates continuous visual-semantic embeddings from discrete hard constraints (color, price, gender, category).</li>
-          <li><strong>Hard-Negative Mining:</strong> Explicitly trains the LightGBM LambdaMART ranker on visually identical items that violate one structured constraint, driving sharp decision boundaries.</li>
-          <li><strong>Sub-Millisecond Parsing:</strong> Deterministic regex and token-based query understanding eliminates costly external LLM latency and hallucination.</li>
-          <li><strong>Dual Vector DB Support:</strong> Direct Pinecone Cloud SDK integration with embedded zero-dependency local vector index fallback.</li>
-        </ul>
       </div>
     </div>
   </div>

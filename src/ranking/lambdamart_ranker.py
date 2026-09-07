@@ -119,22 +119,51 @@ class LambdaMARTRanker:
             return []
 
         if self.model is None:
-            # Fallback if un-trained: rank by semantic similarity
             logger.warning("LambdaMART model not loaded; falling back to similarity score.")
-            scores = [float(c.get("similarity_score", 0.0)) for c in candidates]
+            scores = [float(c.get("similarity_score", 0.5)) for c in candidates]
         else:
-            scores = self.model.predict(features).tolist()
+            try:
+                scores = self.model.predict(features).tolist()
+            except Exception as e:
+                logger.warning(f"LambdaMART inference error: {e}; falling back to similarity.")
+                scores = [float(c.get("similarity_score", 0.5)) for c in candidates]
+
+        # Normalize model margins into [0, 1] relative distribution
+        scores_arr = np.array(scores, dtype=np.float32)
+        std_val = float(np.std(scores_arr))
+        if len(scores_arr) > 1 and std_val > 1e-6:
+            norm_scores = 1.0 / (1.0 + np.exp(-((scores_arr - float(np.mean(scores_arr))) / std_val)))
+        else:
+            norm_scores = np.full(len(scores_arr), 0.5, dtype=np.float32)
 
         reranked = []
         for i, cand in enumerate(candidates):
             c_copy = dict(cand)
-            c_copy["rerank_score"] = float(scores[i])
-            if constraint_statuses and i < len(constraint_statuses):
-                c_copy["constraint_status"] = constraint_statuses[i]
+            status = constraint_statuses[i] if (constraint_statuses and i < len(constraint_statuses)) else {}
+            
+            all_satisfied = status.get("all_satisfied", True)
+            hard_violated = status.get("hard_violated", False)
+            sat_ratio = float(status.get("satisfaction_ratio", 1.0))
+            base_s = float(norm_scores[i])
+
+            # Tiered scoring ensuring constraint-compliant items rank above violators
+            if all_satisfied:
+                tier = 2
+                final_score = 0.85 + (0.13 * base_s)
+            elif not hard_violated:
+                tier = 1
+                final_score = 0.68 + (0.12 * base_s * sat_ratio)
+            else:
+                tier = 0
+                final_score = 0.35 + (0.22 * base_s * max(sat_ratio, 0.1))
+
+            c_copy["rerank_score"] = round(float(final_score), 4)
+            c_copy["ranking_tier"] = tier
+            c_copy["constraint_status"] = status
             reranked.append(c_copy)
 
-        # Sort descending by rerank score
-        reranked.sort(key=lambda x: x["rerank_score"], reverse=True)
+        # Sort primarily by tier (compliant > partial > violator), then by rerank_score
+        reranked.sort(key=lambda x: (x["ranking_tier"], x["rerank_score"]), reverse=True)
         
         # Update rank
         for new_rank, item in enumerate(reranked, start=1):

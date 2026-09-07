@@ -291,6 +291,8 @@ def _execute_search_pipeline(
     # Construct Product Cards
     product_cards = []
     for item in top_results:
+        raw_img = str(item.get("image_url", "")).strip()
+        clean_img = raw_img.split("~")[0].strip() if raw_img else ""
         product_cards.append(ProductCard(
             product_id=item["product_id"],
             name=item["name"],
@@ -303,7 +305,7 @@ def _execute_search_pipeline(
             gender=item["gender"],
             rating=item["rating"],
             is_waterproof=item["is_waterproof"],
-            image_url=item["image_url"],
+            image_url=clean_img,
             similarity_score=round(item["similarity_score"], 4),
             rerank_score=round(item["rerank_score"], 4),
             initial_rank=item["initial_rank"],

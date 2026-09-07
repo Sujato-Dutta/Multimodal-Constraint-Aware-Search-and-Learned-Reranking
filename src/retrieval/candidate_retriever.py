@@ -30,7 +30,8 @@ class CandidateRetriever:
         
         candidates = []
         for rank, match in enumerate(matches, start=1):
-            meta = match.get("metadata", {})
+            raw_img = str(meta.get("image_url", "")).strip()
+            clean_img = raw_img.split("~")[0].strip() if raw_img else ""
             candidate = {
                 "product_id": match["id"],
                 "similarity_score": float(match["score"]),
@@ -46,7 +47,7 @@ class CandidateRetriever:
                 "rating": float(meta.get("rating", 4.5)),
                 "is_waterproof": bool(meta.get("is_waterproof", False)),
                 "is_running": bool(meta.get("is_running", False)),
-                "image_url": meta.get("image_url", "")
+                "image_url": clean_img
             }
             candidates.append(candidate)
             

@@ -78,16 +78,56 @@ class CLIPEncoder:
 
         embs = []
         for img in images:
-            img_desc = "adidas footwear running shoes black performance"
-            if isinstance(img, str) and ("jacket" in img.lower() or "apparel" in img.lower()):
-                img_desc = "adidas apparel outerwear jacket black windbreaker"
-            elif isinstance(img, str) and "shorts" in img.lower():
-                img_desc = "adidas apparel athletic running shorts black"
+            img_category = "footwear"
+            img_color = "black"
+
+            if isinstance(img, str):
+                s = img.lower()
+                if any(w in s for w in ["jacket", "apparel", "outerwear", "windbreaker"]):
+                    img_category = "apparel"
+                elif "short" in s:
+                    img_category = "shorts"
+                for c in ["red", "blue", "white", "black", "grey", "green", "yellow", "pink", "purple", "orange"]:
+                    if c in s:
+                        img_color = c
+                        break
+            elif isinstance(img, Image.Image):
+                try:
+                    thumb = img.convert("RGB").resize((32, 32))
+                    arr = np.array(thumb, dtype=np.float32)
+                    r, g, b = arr.mean(axis=(0, 1))
+                    if r > 120 and g < 95 and b < 95:
+                        img_color = "red"
+                    elif b > 115 and r < 95:
+                        img_color = "blue"
+                    elif g > 115 and r < 95 and b < 95:
+                        img_color = "green"
+                    elif r > 190 and g > 190 and b > 190:
+                        img_color = "white"
+                    elif r < 65 and g < 65 and b < 65:
+                        img_color = "black"
+                    elif abs(r - g) < 20 and abs(g - b) < 20:
+                        img_color = "grey"
+                    elif r > 170 and g > 90 and b < 70:
+                        img_color = "orange"
+                    elif r > 170 and g > 170 and b < 90:
+                        img_color = "yellow"
+                    elif r > 150 and b > 130 and g < 110:
+                        img_color = "purple"
+                except Exception:
+                    img_color = "black"
+
+            if img_category == "apparel":
+                img_desc = f"adidas apparel outerwear jacket {img_color} performance"
+            elif img_category == "shorts":
+                img_desc = f"adidas apparel athletic running shorts {img_color}"
+            else:
+                img_desc = f"adidas footwear running shoes {img_color} performance"
+
             v = self._project_text_semantic(img_desc)
-            
-            seed_val = abs(hash(str(img))) % 100000
+            seed_val = abs(hash(str(img_color) + str(img_category))) % 100000
             np.random.seed(seed_val)
-            v = v + np.random.normal(0, 0.04, size=self.dim).astype(np.float32)
+            v = v + np.random.normal(0, 0.03, size=self.dim).astype(np.float32)
             v = v / np.linalg.norm(v)
             embs.append(v)
             
