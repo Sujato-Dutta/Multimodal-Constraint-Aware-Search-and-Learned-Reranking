@@ -30,6 +30,7 @@ class CandidateRetriever:
         
         candidates = []
         for rank, match in enumerate(matches, start=1):
+            meta = match.get("metadata", {})
             raw_img = str(meta.get("image_url", "")).strip()
             clean_img = raw_img.split("~")[0].strip() if raw_img else ""
             candidate = {
