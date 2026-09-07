@@ -1,6 +1,6 @@
 # Multimodal Constraint-Aware Search & Learned Reranking
 
-**ConstraintSearch** is an end-to-end multimodal e-commerce search and learned reranking engine designed to bridge the gap between continuous vector visual similarity and strict commercial business constraints. While modern vision-language models like CLIP excel at visual aesthetic matching, they suffer from "constraint blindness"—recommending out-of-budget products, wrong categories, or incorrect attributes simply because they look visually similar. This project builds a high-throughput, two-stage retrieval and reranking pipeline combining vector candidate retrieval with a **LightGBM LambdaMART** learning-to-rank reranker trained with hard-negative mining to reliably enforce discrete price, category, color, gender, and attribute constraints in real time.
+**ConstraintSearch** is a production-grade multimodal retail search engine that pairs CLIP vector retrieval with a LightGBM LambdaMART learned reranker, reliably enforcing hard business constraints (budget, color, category, gender) while preserving semantic visual relevance.
 
 Watch 👉 [Demo Video 🎥](https://youtu.be/L9ukeRXnRdI?si=09nDde4rQN6bZtx7)
 
@@ -14,21 +14,8 @@ Watch 👉 [Demo Video 🎥](https://youtu.be/L9ukeRXnRdI?si=09nDde4rQN6bZtx7)
 - **Sub-Millisecond Deterministic Constraint Parsing:** Ultra-fast regex-based extraction of discrete constraints (color, price ceiling, category, gender, waterproof specifications) in `<1ms`, eliminating LLM latency and hallucination.
 - **Two-Stage Retrieval Architecture:** High-recall vector candidate retrieval using CLIP ViT-B/32 embeddings, retrieving top candidate pools within milliseconds.
 - **Learned LambdaMART Reranking:** LightGBM Learning-to-Rank model with pairwise loss and hard-negative mining, achieving a **+28.5% gain in NDCG@10** and **+32.4% gain in constraint satisfaction** over standard vector search.
-- **16-Dimensional Feature Engineering:** Dense signal extraction fusing visual cosine similarities, exact category/color matching, soft price margin decay curves, and attribute overlaps.
 - **Tiered Ranking Enforcement:** Strict ranking prioritization (All Constraints Satisfied > Soft Mismatch > Hard Violator) ensuring compliant products consistently outrank violating items.
-- **Modern Interactive Dashboard:** Sleek responsive UI with live latency waterfall timings, query-level NDCG@10 / Recall@10 metrics, dark/light theme switching, and instant preset test scenarios.
 - **Production-Ready FastAPI Backend:** Asynchronous REST API delivering end-to-end p95 search latency `< 50ms`, comprehensive health diagnostics, and full automated pytest coverage.
-
----
-
-## 📌 Problem Overview & Motivation
-
-Standard multimodal search systems typically rely on continuous embedding representations (such as CLIP or SigLIP) to perform vector nearest-neighbor search. While effective for fuzzy aesthetic similarity, this approach exhibits serious failure modes in commercial retail retrieval:
-1. **Constraint Blindness:** A user searching for *"black waterproof running shoes under $120"* receives visually similar $220 hiking boots, white lifestyle sneakers, or jackets because dot-product similarity cannot reliably enforce hard filters.
-2. **Compositional Failure:** Query modifiers (price limits, department, waterproof membranes) get overpowered by visual dominance in the latent embedding space.
-3. **Cross-Category Distractors:** Visually dark apparel or accessories get ranked ahead of shoes due to color-texture alignment.
-
-**ConstraintSearch** solves this by explicitly disentangling **semantic visual intent** from **discrete hard constraints**, combining vector candidate retrieval with a **LightGBM LambdaMART** learning-to-rank reranker trained with **hard-negative mining**.
 
 ---
 
