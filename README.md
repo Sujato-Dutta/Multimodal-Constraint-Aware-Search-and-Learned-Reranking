@@ -94,29 +94,6 @@ All metrics are rigorously evaluated on a disjoint test query suite with multi-g
 
 ---
 
-## 🛠️ Feature Engineering (16 Signals)
-
-For every candidate product retrieved from vector search, the system extracts a dense feature vector:
-
-1. `clip_text_similarity`: Cosine similarity between query text embedding and product title/description.
-2. `clip_image_similarity`: Cosine similarity between reference image embedding and product visual embedding.
-3. `clip_multimodal_similarity`: Fused query representation similarity.
-4. `category_match`: Exact category & subcategory alignment score ($1.0, 0.75, 0.0$).
-5. `color_match`: Exact color taxonomy match ($1.0, 0.5, 0.0$).
-6. `price_compatibility`: Budget constraint penalty with smooth linear degradation for slight overages.
-7. `gender_match`: Department consistency ($1.0$ if match or unisex, $0.0$ if mismatch).
-8. `waterproof_match`: GORE-TEX / waterproof feature compliance.
-9. `attribute_overlap_ratio`: Jaccard keyword overlap of style keywords (*running, lightweight, boost*).
-10. `constraints_total_count`: Total active constraints in query.
-11. `constraints_satisfied_count`: Total constraints satisfied by this candidate.
-12. `constraints_satisfaction_ratio`: Satisfied count / total active count.
-13. `hard_violation_flag`: Binary indicator ($1.0$ if any hard constraint is breached).
-14. `relative_price`: Normalized price relative to catalog range.
-15. `product_rating`: Normalized customer rating prior.
-16. `popularity_score`: Log-scaled review volume prior.
-
----
-
 ## 🚀 Quick Start & Installation
 
 ### 1. Prerequisites
